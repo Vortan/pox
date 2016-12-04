@@ -36,7 +36,7 @@ const englishToArmenian = {
   d: 'տ',
   r: 'ր',
   ts: 'ց',
-  // i: 'ու',
+  // i: 'ւ',
   p: 'փ',
   k: 'ք',
   ev: 'և',

@@ -5,6 +5,7 @@ const map = require('./maps/english_to_armenian');
 const {
   createCompoundLetter
 } = require('./utils');
+const correctWord = require('./spellcheck/spellcheck')
 
 function convertLetter(letter) {
   return _.get(map, letter);
@@ -49,22 +50,27 @@ function convertWord(word) {
     newWord += translationObject.translation;
   }
 
-  return newWord;
+  return correctWord(newWord)
+  .then(spellcheckedWord => {
+    return Promise.resolve(spellcheckedWord);
+  })
 }
 
 function convertWords(words) {
-  let newSentence = '';
   return _.reduce(words, (newSentence, word) => {
-    const newWord = convertWord(word);
-    return `${newSentence} ${newWord}`
+    return convertWord(word)
+    .then(newWord => {
+      return Promise.resolve(`${newSentence} ${newWord}`);
+    })
   }, '');
 }
 
 function convertSentence(sentence) {
   const words = _.words(sentence);
-  const newSentence = convertWords(words);
-
-  return newSentence;
+  return convertWords(words)
+  .then(newSentence => {
+    return Promise.resolve(newSentence);
+  }); 
 }
 
 module.exports = convertSentence;
