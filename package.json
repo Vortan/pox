@@ -1,0 +1,13 @@
+{
+  "name": "pox",
+  "version": "0.0.1",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vortan/pox"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
+}
